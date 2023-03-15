@@ -1,0 +1,19 @@
+# DuckDB config reference:
+config:
+  send_anonymous_usage_stats: False
+  use_colors: True
+meltano:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: /tmp/data.duckdb
+      filesystems:
+        - fs: s3
+          anon: false
+          key: foo
+          secret: bar
+          client_kwargs:
+            endpoint_url: "http://localstack:4566"
+      external_root: "s3://datawarehouse/data"
+      threads: 4
